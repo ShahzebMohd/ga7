@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Q2 Earnings – Interactive Report (RevealJS)</title>
+  <!-- RevealJS core + theme (CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css" id="theme">
+  <!-- Optional: code highlighting theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/monokai.css">
+  <style>
+    /* simple polish */
+    .reveal h1, .reveal h2 { letter-spacing: .3px; }
+    .brand { font-weight: 600; }
+    .kpi { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+    .kpi > div { border: 1px solid #eee; border-radius: 14px; padding: 18px; text-align: center; }
+    .chart { width: 100%; height: 46vh; border: 1px dashed #ddd; border-radius: 14px; display:flex; align-items:center; justify-content:center; font-size: 1rem; }
+    .footnote { font-size: .6em; opacity: .7; margin-top: .4rem; }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Title / Contact -->
+      <section>
+        <h1 class="brand">Quarterly Earnings – Interactive Report</h1>
+        <p>Prepared by: Technical Consultant</p>
+        <p>Email: <strong>23f2002019@ds.study.iitm.ac.in</strong></p>
+        <p class="footnote">Use <kbd>F</kbd> for fullscreen, <kbd>S</kbd> for speaker notes, <kbd>O</kbd> for overview.</p>
+        <aside class="notes">
+          Welcome stakeholders. This deck highlights Q2 results, drivers, and outlook. Use the notes to keep timing tight (~25 minutes total). End with the roadmap & Q&A.
+        </aside>
+      </section>
+
+      <!-- Markdown slide (requirements: at least one) -->
+      <section data-markdown>
+        <textarea data-template>
+### Agenda (Markdown)
+
+- Performance Snapshot
+- Revenue & Margin Walkthrough
+- Cash Flow & Liquidity
+- Guidance and Risks
+- Q&A
+
+> Tip: Navigate with arrow keys. Press **S** for speaker notes.
+        </textarea>
+      </section>
+
+      <!-- Animated KPIs with fragments -->
+      <section>
+        <h2>Performance Snapshot</h2>
+        <div class="kpi">
+          <div class="fragment">
+            <h3>Revenue</h3>
+            <p><strong>$2.48B</strong> (+9% YoY)</p>
+          </div>
+          <div class="fragment">
+            <h3>Gross Margin</h3>
+            <p><strong>58.2%</strong> (+120 bps)</p>
+          </div>
+          <div class="fragment fade-up">
+            <h3>EPS (Dil.)</h3>
+            <p><strong>$1.34</strong> (+11% YoY)</p>
+          </div>
+        </div>
+        <aside class="notes">Reveal the KPIs one-by-one. Emphasize pricing discipline and mix shift into subscription revenue.</aside>
+      </section>
+
+      <!-- Code sample with syntax highlighting and line focus -->
+      <section>
+        <h2>Reproducible Metric Check (Python)</h2>
+        <pre><code class="language-python" data-line-numbers="1-3|5-10|12-14">
+import pandas as pd
+import numpy as np
+
+# Load model-ready revenue series
+rev = pd.Series([2.12, 2.23, 2.31, 2.48], index=pd.period_range('2024Q3', periods=4, freq='Q'))
+
+def yoy_growth(series):
+    return (series.iloc[-1] / series.iloc[-5]) - 1 if len(series) > 4 else (series.iloc[-1] / series.iloc[0]) - 1
+
+# Q2 YoY Growth
+print(f"YoY: {100*yoy_growth(rev):.1f}%")
+        </code></pre>
+        <aside class="notes">Highlight our transparency: metrics and charts reproducible from raw exports.</aside>
+      </section>
+
+      <!-- Math (financial formulas) using MathJax v3 via Reveal Math plugin) -->
+      <section>
+        <h2>Valuation & Finance Math</h2>
+        <p>Net Present Value (NPV):</p>
+        <p>\[\text{NPV} = \sum_{t=1}^{T} \frac{CF_t}{(1+r)^t} - C_0\]</p>
+        <p>Dividend Discount (Gordon Growth):</p>
+        <p>\[P_0 = \frac{D_1}{r-g}\]</p>
+        <aside class="notes">Explain discount rate assumptions (WACC) and sensitivity to growth g. Use next slide for scenario table.</aside>
+      </section>
+
+      <!-- Simple placeholder chart area + fragments to layer insights -->
+      <section>
+        <h2>Revenue Bridge</h2>
+        <div class="chart">
+          Interactive bridge (embed D3/Observable/Plotly here)
+        </div>
+        <ul>
+          <li class="fragment">Price: +$120M</li>
+          <li class="fragment">Volume: +$75M</li>
+          <li class="fragment">FX: -$30M</li>
+          <li class="fragment fade-in-then-out">Acquisition: +$95M</li>
+        </ul>
+        <aside class="notes">Use fragments to pace the story; highlight that FX headwinds normalize in H2.</aside>
+      </section>
+
+      <!-- Speaker notes demo within slide -->
+      <section>
+        <h2>Guidance</h2>
+        <p>FY Revenue growth <strong>8–10%</strong>; Operating margin expansion <strong>~100 bps</strong>.</p>
+        <aside class="notes">Reiterate confidence; call out execution risks: supply chain, macro, and integration.</aside>
+      </section>
+
+      <!-- Resources / Controls -->
+      <section>
+        <h2>Controls & Help</h2>
+        <ul>
+          <li>Press <kbd>?</kbd> for shortcuts</li>
+          <li>Add cache-buster: <code>?v=1</code>, <code>?v=2</code> when updating GitHub Pages</li>
+          <li>Open Presenter View with <kbd>S</kbd></li>
+        </ul>
+        <aside class="notes">If content looks stale after deploy, append ?v=2 and hard refresh.</aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- RevealJS + Plugins -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/markdown/markdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/highlight.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/math/math.js"></script>
+  
+  <script>
+    Reveal.initialize({
+      hash: true,
+      controls: true,
+      progress: true,
+      transition: 'slide',
+      width: 1280,
+      height: 720,
+      plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.MathJax3 ],
+      math: {
+        mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+      }
+    });
+  </script>
+</body>
+</html>
